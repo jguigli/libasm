@@ -1,32 +1,31 @@
-SRC_M = ./src/ft_read.s
-		./src/ft_strcmp.s
-		./src/ft_strcpy.s
-		./src/ft_strdup.s
-		./src/ft_strlen.s
-		./src/ft_write.s
+SRC_M = ./src/ft_read.s \
+		./src/ft_strcmp.s \
+		./src/ft_strcpy.s \
+		./src/ft_strdup.s \
+		./src/ft_strlen.s \
+		./src/ft_write.s \
 
-SRC_B = 
-
-
-HEADER			=	
-HEADER_BONUS	=	
+TEST = ./test/test.c \
 
 SOURCES			=	$(SRC_M)
-BONUS_FILES		=	$(SRC_B)
+TESTFILES		=	$(TEST)
 
 OBJECTS			= 	$(SOURCES:.s=.o)
-OBJECTS_BONUS	= 	$(BONUS_FILES:.s=.o)
+OBJECTS_TEST	= 	$(TEST:.c=.o)
+DEP_TEST		=	$(TEST:.c=.d)
 
 NAME			=	libasm.a
-NAME_BONUS		=	
+EXEC			= 	asmtest
 
 CC				=	nasm
 RM				=	rm -f
 
-CFLAGS			=	-f elf64
+CFLAGS			=	-f elf64 -g
 
 .s.o:
-				$(CC) $(CFLAGS) -c $< -o $(<:.s=.o)
+				$(CC) $(CFLAGS) $< -o $(<:.s=.o)
+.c.o:
+				gcc -g -MMD -c $< -o $@ -I $(DEP_TEST)
 
 all:			$(NAME)
 
@@ -35,14 +34,15 @@ bonus:			$(NAME_BONUS)
 $(NAME):		$(OBJECTS)
 				ar -rcs $(NAME) $(OBJECTS)
 
-$(NAME_BONUS):	$(OBJECTS) $(OBJECTS_BONUS)
-				ar -rcs $(NAME) $(OBJECTS) $(OBJECTS_BONUS)
+test:			$(NAME) $(OBJECTS_TEST)
+				gcc -g $(OBJECTS_TEST) $(NAME) -o $(EXEC)
+				./$(EXEC)
 
 clean:
-				$(RM) $(OBJECTS) $(OBJECTS_BONUS)
+				$(RM) $(OBJECTS) $(OBJECTS_TEST) $(DEP_TEST)
 
 fclean:			clean
-				$(RM) $(NAME) $(NAME_BONUS)
+				$(RM) $(NAME) $(EXEC)
 
 re:				fclean all
 
