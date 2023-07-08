@@ -35,12 +35,12 @@ int main() {
 	char buffer[100];
     printf("Enter a string for read: \n");
     ssize_t bytes_read = read(STDIN_FILENO, buffer, sizeof(buffer));
-    buffer[bytes_read - 1] = '\0'; // Replace the newline character with null terminator
+    buffer[bytes_read - 1] = '\0';
     printf("read result: %s\n", buffer);
 
     printf("Enter a string for ft_read: \n");
     bytes_read = ft_read(STDIN_FILENO, buffer, sizeof(buffer));
-    buffer[bytes_read - 1] = '\0'; // Replace the newline character with null terminator
+    buffer[bytes_read - 1] = '\0';
     printf("ft_read result: %s\n", buffer);
 
     // Test write
