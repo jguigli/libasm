@@ -1,5 +1,16 @@
 #include "test.h"
 
+int compare_ints(void *a, void *b) {
+    int num1 = *((int*)a);
+    int num2 = *((int*)b);
+    
+    if (num1 < num2)
+        return -1;
+    else if (num1 > num2)
+        return 1;
+    else
+        return 0;
+}
 
 int main() {
     // Test strcmp
@@ -48,6 +59,51 @@ int main() {
     write(STDOUT_FILENO, message, strlen(message));
     message = "Hello from ft_write!\n";
     ft_write(STDOUT_FILENO, message, strlen(message));
+
+    // Test atoi_base
+    // char str[] = "FF";
+    // char base[] = "0123456789ABCDEF";
+    // int result = ft_atoi_base(str, base);
+    // printf("Le résultat de ft_atoi_base est : %d\n", result);
+
+    // Test list_push_front
+    t_list *list = NULL;
+    int data1 = 10;
+    int data2 = 20;
+    int data3 = 30;
+    
+    ft_list_push_front(&list, &data1);
+    ft_list_push_front(&list, &data2);
+    ft_list_push_front(&list, &data3);
+    
+    t_list *current = list;
+    while (current != NULL) {
+        printf("%d\n", *((int*)current->data));
+        current = current->next;
+    }
+
+    // Test list_size
+    int size = ft_list_size(list);
+    printf("La taille de la liste est : %d\n", size);
+
+    // Test list_sort
+    // ft_list_sort(&list, compare_ints);
+    
+    // current = list;
+    // while (current != NULL) {
+    //     printf("%d\n", *((int*)current->data));
+    //     current = current->next;
+    // }
+
+    // Test list_remove_if
+    // int data_to_remove = 20;
+    // ft_list_remove_if(&list, &data_to_remove, compare_ints);
+    
+    // current = list;
+    // while (current != NULL) {
+    //     printf("%d\n", *((int*)current->data));
+    //     current = current->next;
+    // }
 
     return 0;
 }

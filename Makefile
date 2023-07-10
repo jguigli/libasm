@@ -5,12 +5,17 @@ SRC_M = ./src/ft_read.s \
 		./src/ft_strlen.s \
 		./src/ft_write.s \
 
+SRC_B = ./bonus/ft_list_push_front.s \
+		./bonus/ft_list_sort.s \
+
 TEST = ./test/test.c \
 
 SOURCES			=	$(SRC_M)
+SOURCES_B		= 	$(SRC_B)
 TESTFILES		=	$(TEST)
 
 OBJECTS			= 	$(SOURCES:.s=.o)
+OBJECTS_B		=	$(SOURCES_B:.s=.o)
 OBJECTS_TEST	= 	$(TEST:.c=.o)
 DEP_TEST		=	$(TEST:.c=.d)
 
@@ -29,7 +34,8 @@ CFLAGS			=	-f elf64 -g
 
 all:			$(NAME)
 
-bonus:			$(NAME_BONUS)
+bonus:			$(NAME) $(OBJECTS_B)
+				ar -rcs $(NAME) $(OBJECTS) $(OBJECTS_B)
 
 $(NAME):		$(OBJECTS)
 				ar -rcs $(NAME) $(OBJECTS)

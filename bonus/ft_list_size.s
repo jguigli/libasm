@@ -5,6 +5,8 @@ section .text
 
 ft_list_size:
 
+push    rbp
+mov     rbp, rsp
 push 	rdi
 mov 	rax, 0
 
@@ -24,6 +26,8 @@ inc		rax
 
 end:
 
+mov     rsp, rbp
+pop     rbp
 pop 	rdi
 
 ret

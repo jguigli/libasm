@@ -6,6 +6,12 @@
 #include <stdlib.h>
 #include <string.h>
 
+typedef struct s_list
+{
+	void *data;
+	struct s_list *next;
+} t_list;
+
 /* MANDATORY */
 extern int ft_strcmp(const char *s1, const char *s2);
 extern char* ft_strcpy(char *dest, const char *src);
@@ -20,11 +26,5 @@ extern void	ft_list_push_front(t_list **begin_list, void *data);
 extern int ft_list_size(t_list *begin_list);
 extern void	ft_list_sort(t_list **begin_list, int (*cmp)());
 extern void	ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)());
-
-typedef struct s_list
-{
-	void *data;
-	struct s_list *next;
-} t_list;
 
 #endif
