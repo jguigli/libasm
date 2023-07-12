@@ -5,29 +5,24 @@ section .text
 
 ft_list_size:
 
-push    rbp
-mov     rbp, rsp
-push 	rdi
-mov 	rax, 0
+xor		rax, rax
 
-mov 	rsi, [rdi]
-cmp		rsi, 0
+cmp		rdi, 0
 je		end
 
-inc 	rax
+mov 	rsi, rdi
 
 loop:
+
+inc		rax
 
 mov     rsi, [rsi + 8]
 cmp 	rsi, 0
 je		end
 
-inc		rax
+jmp		loop
+
 
 end:
-
-mov     rsp, rbp
-pop     rbp
-pop 	rdi
 
 ret

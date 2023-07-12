@@ -6,16 +6,10 @@ section .text
 
 ft_list_push_front:
 
-push    rbp
-mov     rbp, rsp
 push    rbx
 push    rsi
 push 	rdi
-
-
-mov     rbx, qword [rdi]
-cmp 	rbx, 0
-je		emptylist
+xor		rax, rax
 
 mov 	rdi, 16
 call 	malloc wrt ..plt
@@ -23,33 +17,21 @@ cmp 	rax, 0
 je		error
 
 pop 	rdi
-mov 	rsi, rax
+pop		rsi
 
-mov 	[rsi + 8], rdi
-mov 	qword [rdi], rsi
+mov		rbx, [rdi]
+
+mov 	[rax], rsi
+mov 	[rax + 8], rbx
+mov 	[rdi], rax
+
 jmp		end
 
-
-emptylist:
-
-mov 	rdi, 16
-call 	malloc wrt ..plt
-cmp 	rax, 0
-je		error
-
-pop 	rdi
-mov 	rsi, rax
-
-mov 	qword [rdi], rsi
-jmp		end
 
 error:
 
-mov     rsp, rbp
-pop     rbp
-
 pop		rdi
-pop     rsi
+pop		rsi
 pop     rbx
 
 neg		rax
@@ -61,9 +43,6 @@ ret
 
 end:
 
-mov     rsp, rbp
-pop     rbp
-
-pop     rsi
 pop     rbx
+
 ret

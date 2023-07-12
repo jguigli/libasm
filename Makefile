@@ -6,7 +6,10 @@ SRC_M = ./src/ft_read.s \
 		./src/ft_write.s \
 
 SRC_B = ./bonus/ft_list_push_front.s \
+		./bonus/ft_list_size.s \
 		./bonus/ft_list_sort.s \
+		./bonus/ft_list_remove_if.s \
+		./bonus/ft_atoi_base.s \
 
 TEST = ./test/test.c \
 
@@ -35,17 +38,17 @@ CFLAGS			=	-f elf64 -g
 all:			$(NAME)
 
 bonus:			$(NAME) $(OBJECTS_B)
-				ar -rcs $(NAME) $(OBJECTS) $(OBJECTS_B)
+				ar -rcs $(NAME) $(OBJECTS_B)
 
-$(NAME):		$(OBJECTS)
-				ar -rcs $(NAME) $(OBJECTS)
+$(NAME):		$(OBJECTS) $(OBJECTS_B)
+				ar -rcs $(NAME) $(OBJECTS) $(OBJECTS_B)
 
 test:			$(NAME) $(OBJECTS_TEST)
 				gcc -g $(OBJECTS_TEST) $(NAME) -o $(EXEC)
 				./$(EXEC)
 
 clean:
-				$(RM) $(OBJECTS) $(OBJECTS_TEST) $(DEP_TEST)
+				$(RM) $(OBJECTS) $(OBJECTS_TEST) $(DEP_TEST) $(OBJECTS_B)
 
 fclean:			clean
 				$(RM) $(NAME) $(EXEC)

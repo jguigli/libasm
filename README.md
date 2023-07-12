@@ -1,10 +1,5 @@
 # libasm
 
-TODO :
-
-- Faire bonus
-- Faire de meilleurs test
-
 Projet consistant a creer une bibliotheque libasm.a contenant les fonctions suivantes : strlen, strcpy, strcmp, write, read et strdup.  
 Les fonctions sont recodees en langage assembleur 64 bits syntaxe Intel.
 

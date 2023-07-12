@@ -3,6 +3,8 @@ section .text
 
 ft_strlen :
 
+push	rcx
+
 mov		rax, 0
 mov		rcx, rdi
 
@@ -17,4 +19,5 @@ jmp		loop
 
 end :
 
+pop		rcx
 ret
